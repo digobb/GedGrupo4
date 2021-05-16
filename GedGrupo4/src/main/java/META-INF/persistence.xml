@@ -7,6 +7,7 @@
 		<class>br.upf.ads.topicos.entities.TipoEvento</class>
 		<class>br.upf.ads.topicos.entities.Template</class>
 		<class>br.upf.ads.topicos.entities.Modalidade</class>
+		<class>br.upf.ads.topicos.entities.ModalidadeSubEvento</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/aulatopicos"/>
 			<property name="javax.persistence.jdbc.user" value="postgres"/>
