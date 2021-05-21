@@ -22,7 +22,8 @@ public class ModalidadeSubEvento implements Serializable {
 	@GeneratedValue(strategy = SEQUENCE, generator = "ModalidadeSubEventoId")
 	@SequenceGenerator(name = "ModalidadeSubEventoId", allocationSize = 1, initialValue = 1)
 	private Integer id;
-
+	@ManyToOne(optional = false)
+    private SubEvento subEvento; 
 	private static final long serialVersionUID = 1L;
 
 	public ModalidadeSubEvento() {
