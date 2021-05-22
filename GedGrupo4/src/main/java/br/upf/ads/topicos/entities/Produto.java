@@ -46,12 +46,31 @@ public class Produto implements Serializable {
 		super();
 	}   
 	
-	public Produto(Integer id, String nome, Float preco) {
+	
+	
+
+	public Produto(Integer id) {
+		super();
+		this.id = id;
+	}
+
+
+
+
+	public Produto(Integer id,
+			@NotBlank(message = "O nome deve ser informado!") @Length(min = 2, max = 50, message = "O nome deve ter entre {min} e {max} caracteres.") String nome,
+			@NotNull(message = "O preço deve ser informado.") @DecimalMin(value = "0", inclusive = false, message = "O preço deve ser maior que zero.") Float preco,
+			String arquivoTipo, byte[] arquivoBytes) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
+		this.arquivoTipo = arquivoTipo;
+		this.arquivoBytes = arquivoBytes;
 	}
+
+
+
 
 	public Integer getId() {
 		return this.id;

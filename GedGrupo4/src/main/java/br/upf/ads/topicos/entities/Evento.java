@@ -59,6 +59,8 @@ public class Evento implements Serializable {
 
 	
 
+	
+
 	public Evento(Integer id,
 			@NotBlank(message = "O titulo deve ser informado!") @Length(min = 1, max = 60, message = "O titulo deve ter entre {min} e {max} caracteres.") String titulo,
 			@NotBlank(message = "A descrição deve ser informada!") @Length(min = 1, max = 200, message = "A descrição deve ter entre {min} e {max} caracteres.") String descricao,

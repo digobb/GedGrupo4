@@ -35,6 +35,7 @@ public class Assina implements Serializable {
 	@NotBlank(message = "A imagem deve ser informada!")
 	@Column( nullable = false)
 	private String imagem;
+	@Temporal(TemporalType.DATE)
 	private Date dataInativo;
 	
 	private static final long serialVersionUID = 1L;
@@ -47,6 +48,8 @@ public class Assina implements Serializable {
 		super();
 		this.id = id;
 	}
+
+	
 
 	public Assina(Integer id,
 			@NotBlank(message = "O nome deve ser informado!") @Length(min = 1, max = 45, message = "O nome deve ter entre {min} e {max} caracteres.") String nome,

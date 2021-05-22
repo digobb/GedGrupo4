@@ -20,7 +20,7 @@ public class ConectarBancoTeste extends TestCase
 	public void testCriarBase() {
 		Persistence.createEntityManagerFactory("appged");
 	}
-	
+	/*
 	@org.junit.Test
 	public void testInserir() { //não contém produtos neste novo projeto
 		EntityManager em = Persistence.createEntityManagerFactory("appged").createEntityManager();
@@ -42,7 +42,7 @@ public class ConectarBancoTeste extends TestCase
 		em.merge(new Produto(15, "Produto 15", 1512.3f));
 		em.getTransaction().commit(); 
 	}
-	
+	*/
 	@org.junit.Test
 	public void testListar() { //não contém produtos neste novo projeto
 		EntityManager em = Persistence.createEntityManagerFactory("appged").createEntityManager();

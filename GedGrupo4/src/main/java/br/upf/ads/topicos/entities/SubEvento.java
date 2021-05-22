@@ -3,6 +3,7 @@ package br.upf.ads.topicos.entities;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -48,6 +49,8 @@ public class SubEvento implements Serializable {
     private List<ModalidadeSubEvento> modalidadeSubEventos;
 	@ManyToOne(optional = false)
     private TipoEvento tipoEvento;
+	@ManyToMany
+	private Collection<Assina> assinasCollection;
 
 	
 	private static final long serialVersionUID = 1L;
@@ -63,12 +66,15 @@ public class SubEvento implements Serializable {
 
 	
 
+	
+
 	public SubEvento(Integer id,
 			@NotBlank(message = "O titulo deve ser informado!") @Length(min = 1, max = 60, message = "O titulo deve ter entre {min} e {max} caracteres.") String titulo,
 			@NotBlank(message = "A descrição deve ser informada!") @Length(min = 1, max = 200, message = "A descrição deve ter entre {min} e {max} caracteres.") String descricao,
 			@NotBlank(message = "A data e hora de inicio deve ser informada!") Date dataHoraInicio,
 			@NotBlank(message = "A data e hora de termino deve ser informada!") Date dataHoraTermino, Float totalHoras,
-			Evento evento, List<ModalidadeSubEvento> modalidadeSubEventos, TipoEvento tipoEvento) {
+			Evento evento, List<ModalidadeSubEvento> modalidadeSubEventos, TipoEvento tipoEvento,
+			Collection<Assina> assinasCollection) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -79,6 +85,7 @@ public class SubEvento implements Serializable {
 		this.evento = evento;
 		this.modalidadeSubEventos = modalidadeSubEventos;
 		this.tipoEvento = tipoEvento;
+		this.assinasCollection = assinasCollection;
 	}
 
 	public Integer getId() {
@@ -170,12 +177,7 @@ public class SubEvento implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "SubEvento [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", dataHoraInicio="
-				+ dataHoraInicio + ", dataHoraTermino=" + dataHoraTermino + ", totalHoras=" + totalHoras + ", evento="
-				+ evento + ", modalidadeSubEventos=" + modalidadeSubEventos + "]";
-	}
+	
 
 	public TipoEvento getTipoEvento() {
 		return tipoEvento;
@@ -183,6 +185,22 @@ public class SubEvento implements Serializable {
 
 	public void setTipoEvento(TipoEvento tipoEvento) {
 		this.tipoEvento = tipoEvento;
+	}
+
+	public Collection<Assina> getAssinasCollection() {
+		return assinasCollection;
+	}
+
+	public void setAssinasCollection(Collection<Assina> assinasCollection) {
+		this.assinasCollection = assinasCollection;
+	}
+
+	@Override
+	public String toString() {
+		return "SubEvento [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", dataHoraInicio="
+				+ dataHoraInicio + ", dataHoraTermino=" + dataHoraTermino + ", totalHoras=" + totalHoras + ", evento="
+				+ evento + ", modalidadeSubEventos=" + modalidadeSubEventos + ", tipoEvento=" + tipoEvento
+				+ ", assinasCollection=" + assinasCollection + "]";
 	}
    
 }

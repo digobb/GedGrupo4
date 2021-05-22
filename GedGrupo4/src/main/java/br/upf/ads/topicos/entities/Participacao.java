@@ -30,12 +30,34 @@ public class Participacao implements Serializable {
 	//Upload do arquivo
 	@Column(nullable = true)
 	private String arquivo;
-
+	@ManyToOne(optional = false)
+    private ModalidadeSubEvento modalidadeSubEvento;
+	@ManyToOne(optional = false)
+    private Pessoa pessoa;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Participacao() {
 		super();
 	}
+	
+
+	public Participacao(Integer id) {
+		super();
+		this.id = id;
+	}
+
+
+	public Participacao(Integer id, Float horasParticipou, String arquivo, ModalidadeSubEvento modalidadeSubEvento,
+			Pessoa pessoa) {
+		super();
+		this.id = id;
+		this.horasParticipou = horasParticipou;
+		this.arquivo = arquivo;
+		this.modalidadeSubEvento = modalidadeSubEvento;
+		this.pessoa = pessoa;
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -63,6 +85,53 @@ public class Participacao implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public ModalidadeSubEvento getModalidadeSubEvento() {
+		return modalidadeSubEvento;
+	}
+
+	public void setModalidadeSubEvento(ModalidadeSubEvento modalidadeSubEvento) {
+		this.modalidadeSubEvento = modalidadeSubEvento;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Participacao other = (Participacao) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Participacao [id=" + id + ", horasParticipou=" + horasParticipou + ", arquivo=" + arquivo
+				+ ", modalidadeSubEvento=" + modalidadeSubEvento + ", pessoa=" + pessoa + "]";
 	}
 	
 
