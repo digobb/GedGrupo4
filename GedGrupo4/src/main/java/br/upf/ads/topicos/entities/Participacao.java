@@ -6,7 +6,9 @@ import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -24,14 +26,21 @@ public class Participacao implements Serializable {
 	private Integer id;
 
 	//Horas participadas do evento
+	@NotNull(message = "Deve ser informada a quantidade de horas de participação!")
+	@DecimalMin(value = "0", inclusive = false, message = "A quantidade de horas informadas deve ser maior que 0!")
 	@Column(nullable = false)
 	private Float horasParticipou;
 	
 	//Upload do arquivo
-	@Column(nullable = true)
-	private String arquivo;
+	@Basic(optional = true)
+	@Lob
+	private byte[] arquivo;
+	
+	@NotNull(message = "A modalidade sub-evento deve ser informada!")
 	@ManyToOne(optional = false)
     private ModalidadeSubEvento modalidadeSubEvento;
+	
+	@NotNull(message = "A pessoa deve ser informada!")
 	@ManyToOne(optional = false)
     private Pessoa pessoa;
 	
@@ -48,7 +57,7 @@ public class Participacao implements Serializable {
 	}
 
 
-	public Participacao(Integer id, Float horasParticipou, String arquivo, ModalidadeSubEvento modalidadeSubEvento,
+	public Participacao(Integer id, Float horasParticipou, byte[] arquivo, ModalidadeSubEvento modalidadeSubEvento,
 			Pessoa pessoa) {
 		super();
 		this.id = id;
@@ -75,11 +84,11 @@ public class Participacao implements Serializable {
 		this.horasParticipou = horasParticipou;
 	}
 
-	public String getArquivo() {
+	public byte[] getArquivo() {
 		return arquivo;
 	}
 
-	public void setArquivo(String arquivo) {
+	public void setArquivo(byte[] arquivo) {
 		this.arquivo = arquivo;
 	}
 

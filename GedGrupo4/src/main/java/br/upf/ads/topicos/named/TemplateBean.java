@@ -6,32 +6,29 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
-import br.upf.ads.topicos.entities.TipoEvento;
+import br.upf.ads.topicos.entities.Pessoa;
+import br.upf.ads.topicos.entities.Template;
 import br.upf.ads.topicos.jpa.GenericDao;
 import br.upf.ads.topicos.jsf.JsfUtil;
 import br.upf.ads.topicos.jsf.TrataException;
 
 @Named
 @ViewScoped
-public class TipoEventoBean implements Serializable{
+public class TemplateBean implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private TipoEvento selecionado; // atributo para vinculo com campos do formulário
-	private List<TipoEvento> lista; // atributo para vinculo com o datatable da consulta
+	private Template selecionado; // atributo para vinculo com campos do formulário
+	private List<Template> lista; // atributo para vinculo com o datatable da consulta
 	private Boolean editando; // atributo para controlar o painel visível editar ou consultar
-	private GenericDao<TipoEvento> dao = new GenericDao<TipoEvento>();
+	private GenericDao<Template> dao = new GenericDao<Template>();
 	
-	public TipoEventoBean() {
+	public TemplateBean() {
 		super();
 		setEditando(false);
 		carregarLista();
 	}
 	
 	public void incluir() {
-		selecionado = new TipoEvento();
+		selecionado = new Template(); // cria novo produto
 		setEditando(true);
 	}
 
@@ -73,29 +70,29 @@ public class TipoEventoBean implements Serializable{
 	
 	public void carregarLista() {
 		try {
-			lista = dao.createQuery("from tipoevento order by id");
+			lista = dao.createQuery("from Template order by id");
 		} catch (Exception e) {
 			e.printStackTrace();
 			JsfUtil.addErrorMessage(TrataException.getMensagem(e)); 
 		}			
 	}	
 
-	public List<TipoEvento> getLista() {
+	public List<Template> getLista() {
 		return lista;
 	}
 
 
-	public void setLista(List<TipoEvento> lista) {
+	public void setLista(List<Template> lista) {
 		this.lista = lista;
 	}
 
 
-	public TipoEvento getSelecionado() {
+	public Template getSelecionado() {
 		return selecionado;
 	}
 
 
-	public void setSelecionado(TipoEvento selecionado) {
+	public void setSelecionado(Template selecionado) {
 		this.selecionado = selecionado;
 	}
 
