@@ -22,19 +22,24 @@ public class Assina implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = SEQUENCE, generator = "AssinaId")
-	@SequenceGenerator(name = "AssinaId", allocationSize = 1, initialValue = 1)
+	@SequenceGenerator(name = "AssinaId",sequenceName = "AssinaId", allocationSize = 1)
 	private Integer id;
+	
 	@NotBlank(message = "O nome deve ser informado!")
 	@Length(min = 1, max = 45, message = "O nome deve ter entre {min} e {max} caracteres.")
-	@Column(length = 45, nullable = false)
+	@Basic(optional = false)
 	private String nome;
+	
 	@NotBlank(message = "A função deve ser informada!")
 	@Length(min = 1, max = 50, message = "A função deve ter entre {min} e {max} caracteres.")
-	@Column(length = 50, nullable = false)
+	@Basic(optional = false)
 	private String funcao;
+	
+	@Basic(optional = false)
 	@NotBlank(message = "A imagem deve ser informada!")
-	@Column( nullable = false)
-	private String imagem;
+	@Lob
+	private byte[] imagem;
+	
 	@Temporal(TemporalType.DATE)
 	private Date dataInativo;
 	
@@ -51,55 +56,19 @@ public class Assina implements Serializable {
 
 	
 
+	
+
+	
+
 	public Assina(Integer id,
 			@NotBlank(message = "O nome deve ser informado!") @Length(min = 1, max = 45, message = "O nome deve ter entre {min} e {max} caracteres.") String nome,
 			@NotBlank(message = "A função deve ser informada!") @Length(min = 1, max = 50, message = "A função deve ter entre {min} e {max} caracteres.") String funcao,
-			@NotBlank(message = "A imagem deve ser informada!") String imagem, Date dataInativo) {
+			@NotBlank(message = "A imagem deve ser informada!") byte[] imagem, Date dataInativo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.funcao = funcao;
 		this.imagem = imagem;
-		this.dataInativo = dataInativo;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	public String getFuncao() {
-		return funcao;
-	}
-
-	public void setFuncao(String funcao) {
-		this.funcao = funcao;
-	}
-
-	public String getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
-	}
-
-	public Date getDataInativo() {
-		return dataInativo;
-	}
-
-	public void setDataInativo(Date dataInativo) {
 		this.dataInativo = dataInativo;
 	}
 
@@ -128,10 +97,51 @@ public class Assina implements Serializable {
 		return true;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getFuncao() {
+		return funcao;
+	}
+
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
+	}
+
+	public byte[] getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
+	}
+
+	public Date getDataInativo() {
+		return dataInativo;
+	}
+
+	public void setDataInativo(Date dataInativo) {
+		this.dataInativo = dataInativo;
+	}
+
 	@Override
 	public String toString() {
-		return "Assina [id=" + id + ", nome=" + nome + ", funcao=" + funcao + ", imagem=" + imagem + ", dataInativo="
-				+ dataInativo + "]";
+		return "Assina [id=" + id + ", nome=" + nome + ", funcao=" + funcao + "]";
 	}
+
+	
    
 }

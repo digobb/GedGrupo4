@@ -21,14 +21,15 @@ public class Template implements Serializable {
 	   
 	@Id
 	@GeneratedValue(strategy = SEQUENCE, generator = "TemplateId")
-	@SequenceGenerator(name = "TemplateId", allocationSize = 1, initialValue = 1)	
+	@SequenceGenerator(name = "TemplateId",sequenceName = "TemplateId", allocationSize = 1)	
 	private Integer id;
 	
+	@NotBlank(message = "A descrição deve ser informada!")
 	@Length(min = 2, max = 100, message = "A descrição deve conter entre {min} e {max} caracteres.")
-	@Column(length = 100, nullable = false)	
+	@Basic(optional = false)
 	private String descricao;
 	
-	@Column(length = 100, nullable = false)	
+	@Basic(optional = false)	
 	private String texto;
 
 	private static final long serialVersionUID = 1L;

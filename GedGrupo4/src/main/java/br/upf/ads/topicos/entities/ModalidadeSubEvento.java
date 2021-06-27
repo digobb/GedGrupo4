@@ -7,6 +7,7 @@ import java.lang.Integer;
 import java.lang.String;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -20,14 +21,21 @@ public class ModalidadeSubEvento implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = SEQUENCE, generator = "ModalidadeSubEventoId")
-	@SequenceGenerator(name = "ModalidadeSubEventoId", allocationSize = 1, initialValue = 1)
+	@SequenceGenerator(name = "ModalidadeSubEventoId",sequenceName = "ModalidadeSubEventoId", allocationSize = 1)
 	private Integer id;
+	
+	@NotNull(message = "o subEvento deve ser informado")
 	@ManyToOne(optional = false)
     private SubEvento subEvento; 
+	
+	@NotNull(message = "A modalidade deve ser informada")
 	@ManyToOne(optional = false)
     private Modalidade modalidade;
+	
+	@NotNull(message = "o template deve ser informado")
 	@ManyToOne(optional = false)
     private Template template;
+	
 	private static final long serialVersionUID = 1L;
 
 	public ModalidadeSubEvento() {

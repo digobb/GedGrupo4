@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
@@ -19,30 +21,43 @@ import org.hibernate.validator.constraints.Length;
 
 public class Evento implements Serializable {
 
-	
+	@Version
+	private Integer version;
 	
 	@Id
 	@GeneratedValue(strategy = SEQUENCE, generator = "EventoId")
-	@SequenceGenerator(name = "EventoId", allocationSize = 1, initialValue = 1)	
+	@SequenceGenerator(name = "EventoId",sequenceName = "EventoId", allocationSize = 1)	
 	private Integer id;
+	
 	@NotBlank(message = "O titulo deve ser informado!")
 	@Length(min = 1, max = 60, message = "O titulo deve ter entre {min} e {max} caracteres.")
-	@Column(length = 60, nullable = false)
+	@Basic(optional = false)
 	private String titulo;
-	@NotBlank(message = "A descrição deve ser informada!")
-	@Length(min = 1, max = 200, message = "A descrição deve ter entre {min} e {max} caracteres.")
-	@Column(length = 200, nullable = false)
+	
+	//@NotBlank(message = "A descrição deve ser informada!")
+	//@Length(min = 1, max = 200, message = "A descrição deve ter entre {min} e {max} caracteres.")
+	//@Column(length = 200, nullable = false)
+	//com o lob temos um campo mini word
+	@Basic(optional = true)
+	@Lob
 	private String descricao;
+	
 	@NotBlank(message = "A data de inicio deve ser informada!")
-	@Column(nullable = false)
+	@Basic(optional = false)
 	@Temporal(TemporalType.DATE)
+	@Future(message = "A data de início deve ser no futuro")
 	private Date dataInicio;
-	@NotBlank(message = "A data de termino deve ser informada!")
-	@Column(nullable = false)
+	
+	@NotBlank(message = "A data de término deve ser informada!")
+	@Basic(optional = false)
 	@Temporal(TemporalType.DATE)
+	@Future(message = "A data de términop deve ser no futuro")
 	private Date dataTermino;
-	@Column(nullable = false)
+	
+	@DecimalMin(value = "0", inclusive = true, message = "O total de horas deve ser igual ou maior que zero.")
+	@Column(updatable = false)
 	private Float totalHoras;
+	
 	@OneToMany(mappedBy = "evento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SubEvento> subEventos;
 	
@@ -162,6 +177,14 @@ public class Evento implements Serializable {
 	public String toString() {
 		return "Evento [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", dataInicio=" + dataInicio
 				+ ", dataTermino=" + dataTermino + ", totalHoras=" + totalHoras + ", subEventos=" + subEventos + "]";
+	}
+
+	public Integer getVersion() {
+		return version;
+	}
+
+	public void setVersion(Integer version) {
+		this.version = version;
 	}
 	
    

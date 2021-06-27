@@ -21,7 +21,7 @@ public class Produto implements Serializable {
 	   
 	@Id
 	@GeneratedValue(strategy = SEQUENCE, generator = "ProdutoId")
-	@SequenceGenerator(name = "ProdutoId", allocationSize = 1, initialValue = 1)
+	@SequenceGenerator(name = "ProdutoId",sequenceName = "ProdutoId" ,allocationSize = 1)
 	private Integer id;
 	
 	@NotBlank(message = "O nome deve ser informado!")

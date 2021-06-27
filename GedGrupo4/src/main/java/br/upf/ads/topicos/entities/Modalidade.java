@@ -20,11 +20,13 @@ public class Modalidade implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = SEQUENCE, generator = "ModalidadeId")
-	@SequenceGenerator(name = "ModalidadeId", allocationSize = 1, initialValue = 1)
+	@SequenceGenerator(name = "ModalidadeId",sequenceName = "ModalidadeId", allocationSize = 1)
 	private Integer id;
-
+	
+	
+	@NotBlank(message = "A descrição deve ser informada!")
 	@Length(min = 2, max = 100, message = "A descrição deve conter entre {min} e {max} caracteres.")
-	@Column(length = 100, nullable = false)
+	@Basic(optional = false)
 	private String descricao;
 
 	private static final long serialVersionUID = 1L;

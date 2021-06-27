@@ -6,9 +6,12 @@ import java.io.Serializable;
 import java.lang.Integer;
 import java.lang.String;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
+
+import br.upf.ads.topicos.constraints.StringOptionsValid;
 
 /**
  * Entity implementation class for Entity: Pessoa
@@ -21,23 +24,44 @@ public class Pessoa implements Serializable {
 	   
 	@Id
 	@GeneratedValue(strategy = SEQUENCE, generator = "PessoaId")
-	@SequenceGenerator(name = "PessoaId", allocationSize = 1, initialValue = 1)	
+	@SequenceGenerator(name = "PessoaId",sequenceName = "PessoaId", allocationSize = 1)	
 	private Integer id;
+	
 	@NotBlank(message = "O nome deve ser informado!")
 	@Length(min = 2, max = 60, message = "O nome deve ter entre {min} e {max} caracteres.")
-	@Column(length = 60, nullable = false)	
+	@Basic(optional=false)
 	private String nome;
-	@Column(length = 60, nullable = false)	
+	
+	@NotBlank(message = "O Email  deve ser informado!")
+	@Column(nullable = true,unique = true)
+	@Basic(optional=false)
+	@Email(message = "Email inválido")
 	private String email;
-	@Column(length = 60, nullable = false)	
+	
+	@NotBlank(message = "A senha  deve ser informada!")
+	@Length(min = 6, max = 50, message = "A senha deve ter entre {min} e {max} caracteres.")	
 	private String senha;
-	@Column(length = 60, nullable = false)	
+	
+	@NotBlank(message = "O Documento  deve ser informado!")
+	@Length(min = 2, max = 80, message = "O Documento deve ter entre {min} e {max} caracteres.")
+	@Basic(optional = false)	
+	@Column(nullable = false,unique = true)
 	private String documento;
-	@Column(length = 60, nullable = false)	
+	
+	@NotBlank(message = "O Tipo do Documento  deve ser informado!")
+	@Length(min = 2, max = 60, message = "O tipo do  Documento deve ter entre {min} e {max} caracteres.")
+	@Basic(optional = false)
+	@StringOptionsValid(opcoes = {"RG", "CPF", "Outro"}, message = "Tipo de documento inválido.")
 	private String tipoDocumento;
-	@Column(length = 60, nullable = false)	
+	
+	@NotBlank(message = "A Nacionalidade  deve ser informada!")
+	@Length(min = 2, max = 60, message = "A Nacionalidade deve ter entre {min} e {max} caracteres.")
+	@Basic(optional = false)
+	@StringOptionsValid(opcoes = {"Brasileira", "Outra"}, message = "Nacionalidade inválida.")
 	private String nacionalidade;
-	@Column(length = 20)
+	
+	@Length(max = 15, message = "O Telefone deve ter no máximo {max} dígitos.")
+	@Basic(optional=false)
 	private String telefone;
 	
 

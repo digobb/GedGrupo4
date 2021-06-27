@@ -22,7 +22,7 @@ public class Participacao implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = SEQUENCE, generator = "ParticipacaoId")
-	@SequenceGenerator(name = "ParticipacaoId", allocationSize = 1, initialValue = 1)
+	@SequenceGenerator(name = "ParticipacaoId",sequenceName = "ParticipacaoId", allocationSize = 1)
 	private Integer id;
 
 	//Horas participadas do evento
