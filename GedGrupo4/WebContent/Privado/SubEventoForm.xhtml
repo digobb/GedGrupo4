@@ -1,0 +1,185 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="webjars" name="font-awesome/5.12.0/css/all.min-jsf.css" />
+	<h:outputStylesheet library="webjars" name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+
+<style>
+   .no-border{
+      border-style: hidden !important;
+      text-align: center !important;
+   }
+</style>
+
+</h:head>
+
+<h:body>
+
+
+	<p:panel id="consultar" visible="#{!subEventoBean.editando}">
+		<h:form>
+            
+			<p:commandButton value="Incluir" ajax="true" update="consultar editar"
+				    icon="fa fa-plus"
+					action="#{subEventoBean.incluir}"></p:commandButton>
+					
+			<p:commandButton value="Alterar" ajax="true" update="consultar editar"
+				    icon="fa fa-edit" disabled="#{subEventoBean.selecionado == null}"
+					action="#{subEventoBean.alterar}"></p:commandButton> 
+					           
+			<p:commandButton value="Excluir" ajax="true" update="consultar editar"
+				    icon="fa fa-remove" disabled="#{subEventoBean.selecionado == null}"
+					action="#{subEventoBean.excluir}">
+			    <p:confirm header="Confirma��o" 
+			               message="Confirma a exclus�o?" 
+			               icon="pi pi-exclamation-triangle"/>		
+			</p:commandButton>            
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+	            <p:commandButton value="N�o" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+	            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
+	        </p:confirmDialog>
+
+			<p:dataTable var="p" value="#{subEventoBean.lista}" rows="10"
+				paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				currentPageReportTemplate="Mostrando de {startRecord} até {endRecord} de {totalRecords}"
+				rowsPerPageTemplate="10,30,60" selectionMode="single"
+				selection="#{subEventoBean.selecionado}" rowKey="#{p.id}"
+				emptyMessage="Nenhum registro encontrado."
+				>
+
+				<p:ajax event="rowSelect" update="consultar editar" />
+
+
+				<p:column headerText="Id" 
+							sortBy="#{s.id}" sortOrder="asc" 
+							filterBy="#{s.id}" filterMatchMode="exact">
+					<h:outputText value="#{s.id}" />
+				</p:column>
+
+				<p:column headerText="Titulo" 
+							sortBy="#{s.titulo}"
+							filterBy="#{s.titulo}" filterMatchMode="contains" >
+					<h:outputText value="#{s.titulo}" />
+				</p:column>
+
+				<p:column headerText="Descrição" 
+							sortBy="#{s.descricao}" 
+							filterBy="#{s.descricao}" filterMatchMode="contains">
+					<h:outputText value="#{s.descricao}">
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Data e Hora de Inicio" 
+							sortBy="#{s.dataHoraInicio}"
+							filterBy="#{s.dataHoraInicio}" filterMatchMode="contains" >
+					<h:outputText value="#{s.dataHoraInicio}" />
+				</p:column>
+				
+				<p:column headerText="Data e Hora de Termino" 
+							sortBy="#{s.dataHoraTermino}"
+							filterBy="#{s.dataHoraTermino}" filterMatchMode="contains" >
+					<h:outputText value="#{s.dataHoraTermino}" />
+				</p:column>
+				
+				<p:column headerText="Total de Horas" 
+							sortBy="#{s.totalHoras}"
+							filterBy="#{s.totalHoras}" filterMatchMode="contains" >
+					<h:outputText value="#{s.totalHoras}" />
+				</p:column>
+				
+				<p:column headerText="Evento" 
+							sortBy="#{s.evento}"
+							filterBy="#{s.evento}" filterMatchMode="contains" >
+					<h:outputText value="#{s.evento}" />
+				</p:column>
+				<p:column headerText="Tipo do Evento" 
+							sortBy="#{s.tipoEvento}"
+							filterBy="#{s.tipoEvento}" filterMatchMode="contains" >
+					<h:outputText value="#{s.tipoEvento}" />
+				</p:column>
+				<p:column headerText="Assina" 
+							sortBy="#{s.assina}"
+							filterBy="#{s.assina}" filterMatchMode="contains" >
+					<h:outputText value="#{s.assina}" />
+				</p:column>
+				
+				
+
+
+			</p:dataTable>
+		</h:form>
+
+	</p:panel>
+
+
+	<p:panel id="editar" visible="#{subEventoBean.editando}">
+
+		<h:form>
+			<p:panelGrid columns="2" columnClasses="no-border, no-border"> 
+				<p:outputLabel value="Id"></p:outputLabel>
+				<p:inputNumber decimalPlaces="0" disabled="true" placeholder="Auto"
+					value="#{subEventoBean.selecionado.id}"></p:inputNumber>
+
+				<p:outputLabel value="Titulo"></p:outputLabel>
+				<p:inputText value="#{subEventoBean.selecionado.titulo}"></p:inputText>
+				
+				<p:outputLabel  value="Data e Hora de Inicio"/>
+                <p:datePicker id="time1" value="#{subEventoBean.selecionado.dataHoraInicio}" showTime="true"/>
+				
+				<p:outputLabel  value="Data e Hora de Termino"/>
+                <p:datePicker id="time2" value="#{subEventoBean.selecionado.dataHoraTermino}" showTime="true"/>
+				
+				<p:outputLabel value="Total de Horas"></p:outputLabel>
+				<p:inputText value="#{subEventoBean.selecionado.totalHoras}"></p:inputText>
+				
+				<p:outputLabel value="Evento"></p:outputLabel>
+				<p:inputText value="#{subEventoBean.selecionado.evento}"></p:inputText>
+				
+				<p:outputLabel value="Tipo do Evento"></p:outputLabel>
+				<p:inputText value="#{subEventoBean.selecionado.tipoEvento}"></p:inputText>
+				
+				<p:outputLabel value="Assinantes" for="assinante"></p:outputLabel>
+		        <p:selectManyMenu id="assinante" value="#{subEventoBean.selecionado.assina}"
+		                            converter="assinaConverter"
+		                            var="c" filter="true" filterMatchMode="contains" showCheckbox="true" styleClass="manymenu-advanced">
+		            <f:attribute name="collectionType" value="java.util.ArrayList"></f:attribute>
+		            <f:selectItems value="#{subEventoBean.assinantes}" var="a" itemLabel="#{a.nome}"
+		                            itemValue="#{a}"/>
+		            <p:column>
+		                <h:outputText value="#{c.nome}"/>
+		            </p:column>
+		        </p:selectManyMenu>
+				
+				<p:outputLabel value="Descrição"></p:outputLabel>
+        		<p:textEditor widgetVar="editor1" value="#{eventoBean.selecionado.descricao}" height="150" secure="false"  />
+        	</p:panelGrid>
+        	
+			<center><p:panelGrid columns="2" columnClasses="no-border, no-border">
+			
+
+				<p:commandButton value="Salvar" ajax="true" update="consultar editar"
+				    icon="fa fa-save"
+					action="#{subEventoBean.salvar}"></p:commandButton>
+
+				<p:commandButton value="Cancelar" ajax="true" update="consultar editar"
+				    icon="fa fa-undo" immediate="true"
+					action="#{subEventoBean.cancelar}"></p:commandButton>					
+
+			</p:panelGrid></center>	
+		</h:form>
+		
+	   <p:growl id="msg"></p:growl> 
+
+   </p:panel>
+
+
+
+
+
+</h:body>
+</html>

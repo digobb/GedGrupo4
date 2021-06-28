@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import br.upf.ads.topicos.entities.Assina;
 import br.upf.ads.topicos.entities.SubEvento;
 import br.upf.ads.topicos.jpa.GenericDao;
 import br.upf.ads.topicos.jsf.JsfUtil;
@@ -19,10 +20,12 @@ public class SubEventoBean implements Serializable {
 	private List<SubEvento> lista; // atributo para vinculo com o datatable da consulta
 	private Boolean editando; // atributo para controlar o painel visível editar ou consultar
 	private GenericDao<SubEvento> dao = new GenericDao<SubEvento>();
-	
-	public SubEventoBean() {
+	private List<Assina> assinantes;
+	public SubEventoBean() throws Exception {
 		super();
 		setEditando(false);
+		assinantes = new GenericDao<Assina>().createQuery("from Assina");
+		selecionado = new SubEvento();
 		carregarLista();
 	}
 	
@@ -101,6 +104,14 @@ public class SubEventoBean implements Serializable {
 
 	public void setEditando(Boolean editando) {
 		this.editando = editando;
+	}
+
+	public List<Assina> getAssinantes() {
+		return assinantes;
+	}
+
+	public void setAssinantes(List<Assina> assinantes) {
+		this.assinantes = assinantes;
 	}
 
 }

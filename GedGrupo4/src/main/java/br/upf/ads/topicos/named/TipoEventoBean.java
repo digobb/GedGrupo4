@@ -15,10 +15,6 @@ import br.upf.ads.topicos.jsf.TrataException;
 @ViewScoped
 public class TipoEventoBean implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private TipoEvento selecionado; // atributo para vinculo com campos do formulário
 	private List<TipoEvento> lista; // atributo para vinculo com o datatable da consulta
 	private Boolean editando; // atributo para controlar o painel visível editar ou consultar
@@ -31,7 +27,7 @@ public class TipoEventoBean implements Serializable{
 	}
 	
 	public void incluir() {
-		selecionado = new TipoEvento();
+		selecionado = new TipoEvento(); // cria novo produto
 		setEditando(true);
 	}
 
@@ -73,7 +69,7 @@ public class TipoEventoBean implements Serializable{
 	
 	public void carregarLista() {
 		try {
-			lista = dao.createQuery("from tipoevento order by id");
+			lista = dao.createQuery("from TipoEvento order by id");
 		} catch (Exception e) {
 			e.printStackTrace();
 			JsfUtil.addErrorMessage(TrataException.getMensagem(e)); 

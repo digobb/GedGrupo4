@@ -70,7 +70,7 @@ public class SubEvento implements Serializable {
     private TipoEvento tipoEvento;
 	
 	@NotNull(message = "O campo assina deve ser informado!")
-	@ManyToMany//(mappedBy = "subevento")
+	@ManyToMany(cascade= CascadeType.ALL, fetch = FetchType.EAGER)
 	@Size(min = 1, message = "Deve ter pelo menos um assinante")
 	private List<Assina> assina;
 
