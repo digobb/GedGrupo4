@@ -137,11 +137,13 @@
 				<p:outputLabel value="Total de Horas"></p:outputLabel>
 				<p:inputText value="#{subEventoBean.selecionado.totalHoras}"></p:inputText>
 				
-				<p:outputLabel value="Evento"></p:outputLabel>
-				<p:inputText value="#{subEventoBean.selecionado.evento}"></p:inputText>
-				
-				<p:outputLabel value="Tipo do Evento"></p:outputLabel>
-				<p:inputText value="#{subEventoBean.selecionado.tipoEvento}"></p:inputText>
+				<p:outputLabel value="Evento" for="inputEvento" />
+				<p:autoComplete id="inputEvento" style="width:600px"
+				 dropdown="true" multiple="false" forceSelection="true"
+				 var="obj" itemLabel="#{obj.titulo}" itemValue="#{obj}"
+				 value="#{eventoBean.objeto.evento}"
+				 converter="EventoConverter"
+				 completeMethod="#{eventoBean.completeEvento}" />
 				
 				<p:outputLabel value="Assinantes" for="assinante"></p:outputLabel>
 		        <p:selectManyMenu id="assinante" value="#{subEventoBean.selecionado.assina}"

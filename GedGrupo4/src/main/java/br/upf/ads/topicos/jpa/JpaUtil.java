@@ -18,26 +18,22 @@ import org.hibernate.jpa.HibernateEntityManager;
  */
 public class JpaUtil {
 
-	private static EntityManagerFactory factory;
+	private EntityManagerFactory factory;
 
 	public JpaUtil() {
-		
+		factory = Persistence.createEntityManagerFactory("appged");
 	}
 
 	public static JpaUtil getInstance() {
 		return JpaUtilInstance.INSTANCE;
 	}
 
-	public static EntityManager getEntityManager() {
-		if (factory == null) {
-			factory = Persistence.createEntityManagerFactory("appged");
-		}
+	public EntityManager getEntityManager() {
 		return factory.createEntityManager();
 	}
 
 	private static class JpaUtilInstance {
 		public static final JpaUtil INSTANCE = new JpaUtil();
-		
 	}
 
 	/**

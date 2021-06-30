@@ -5,9 +5,10 @@ import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
-
+import javax.persistence.EntityManager;
 import br.upf.ads.topicos.entities.Evento;
 import br.upf.ads.topicos.jpa.GenericDao;
+import br.upf.ads.topicos.jpa.JpaUtil;
 import br.upf.ads.topicos.jsf.JsfUtil;
 import br.upf.ads.topicos.jsf.TrataException;
 
@@ -75,6 +76,17 @@ public class EventoBean implements Serializable {
 			JsfUtil.addErrorMessage(TrataException.getMensagem(e)); 
 		}			
 	}	
+	
+	public List<Evento> completeEvento(String query) {
+		EntityManager em = JpaUtil.getInstance().getEntityManager();
+		 List<Evento> results = em.createQuery(
+		 "from Evento where upper(titulo) like "+
+		"'"+query.trim().toUpperCase()+"%' "+
+		 "order by titulo").getResultList();
+		 em.close();
+		 return results;
+		 }
+
 
 	public List<Evento> getLista() {
 		return lista;
