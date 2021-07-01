@@ -38,7 +38,7 @@ public class Modalidade implements Serializable {
 
 
 	public Modalidade(Integer id,
-			@Length(min = 2, max = 100, message = "A descrição deve conter entre {min} e {max} caracteres.") String descricao) {
+		@Length(min = 2, max = 100, message = "A descrição deve conter entre {min} e {max} caracteres.") String descricao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;

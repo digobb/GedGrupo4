@@ -1,5 +1,4 @@
 package br.upf.ads.topicos.appged;
-
 import javax.persistence.EntityManager;
 
 import br.upf.ads.topicos.entities.Usuario;
@@ -36,7 +35,7 @@ public class AppTest extends TestCase {
     {
         EntityManager em = JpaUtil.getInstance().getEntityManager();
         em.getTransaction().begin();
-        em.merge(new Usuario(null, "Administrador", "admin@admin", "123456"));
+        //em.merge(new Usuario(null, "Administrador", "admin@admin", "123456"));
         em.getTransaction().commit(); 
     	assertTrue( true );
     }

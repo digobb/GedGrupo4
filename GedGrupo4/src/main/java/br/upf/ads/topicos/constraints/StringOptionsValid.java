@@ -17,8 +17,8 @@ import javax.validation.Payload;
  * @StringOptionsValid(message="Op��o inv�lida!", opcoes={"Fone","Fax","Celular"} )
  */
 public @interface StringOptionsValid {
-    String message() default "Op��o inv�lida!";
+    String message() default "Opção inválida!";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-    String[] opcoes() default {};
+    String[] opcoes() default {}; //por default vazio
 }
