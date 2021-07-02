@@ -12,13 +12,13 @@ import br.upf.ads.topicos.entities.Modalidade;
 import br.upf.ads.topicos.jpa.JpaUtil;
 
 @FacesConverter(value = "modalidadeConverter")
-public class ConverterModalidade implements Converter{
+public class ConverterModalidade implements Converter {
 	@Override
 	public Modalidade getAsObject(FacesContext fc, UIComponent uic, String value) {
 		if (value != null && value.trim().length() > 0) {
 			try {
-				EntityManager em = JpaUtil.getEntityManager();
-				Modalidade ret = em.find(Modalidade.class,Integer.parseInt(value));
+				EntityManager em = JpaUtil.getInstance().getEntityManager();
+				Modalidade ret = em.find(Modalidade.class, Integer.parseInt(value));
 				em.close();
 				return ret;
 			} catch (NumberFormatException e) {
@@ -28,6 +28,7 @@ public class ConverterModalidade implements Converter{
 		} else
 			return null;
 	}
+
 	@Override
 	public String getAsString(FacesContext fc, UIComponent uic, Object object) {
 		if (object != null) {

@@ -11,23 +11,24 @@ import javax.persistence.EntityManager;
 import br.upf.ads.topicos.entities.TipoEvento;
 import br.upf.ads.topicos.jpa.JpaUtil;
 
-@FacesConverter(value = "tipoEventoConverter")
-public class ConverterTipoEvento implements Converter{
+@FacesConverter(value = "tipoTipoEventoConverter")
+public class ConverterTipoEvento implements Converter {
 	@Override
 	public TipoEvento getAsObject(FacesContext fc, UIComponent uic, String value) {
 		if (value != null && value.trim().length() > 0) {
 			try {
-				EntityManager em = JpaUtil.getEntityManager();
-				TipoEvento ret = em.find(TipoEvento.class,Integer.parseInt(value));
+				EntityManager em = JpaUtil.getInstance().getEntityManager();
+				TipoEvento ret = em.find(TipoEvento.class, Integer.parseInt(value));
 				em.close();
 				return ret;
 			} catch (NumberFormatException e) {
 				throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR,
-						"Erro de Conversão do TipoEventonte", "TipoEventonte  inválido."));
+						"Erro de Conversão do Modalidadente", "Modalidadente  inválido."));
 			}
 		} else
 			return null;
 	}
+
 	@Override
 	public String getAsString(FacesContext fc, UIComponent uic, Object object) {
 		if (object != null) {
