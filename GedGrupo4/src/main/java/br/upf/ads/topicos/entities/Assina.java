@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -35,8 +36,8 @@ public class Assina implements Serializable {
 	@Basic(optional = false)
 	private String funcao;
 	
+	@NotNull(message = "A imagem deve ser informada!")
 	@Basic(optional = false)
-	@NotBlank(message = "A imagem deve ser informada!")
 	@Lob
 	private byte[] imagem;
 	

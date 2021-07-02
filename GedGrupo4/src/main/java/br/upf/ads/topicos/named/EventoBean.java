@@ -2,7 +2,10 @@ package br.upf.ads.topicos.named;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.ArrayList;
 
+
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -11,6 +14,18 @@ import br.upf.ads.topicos.jpa.GenericDao;
 import br.upf.ads.topicos.jpa.JpaUtil;
 import br.upf.ads.topicos.jsf.JsfUtil;
 import br.upf.ads.topicos.jsf.TrataException;
+import javax.persistence.Query;
+import org.primefaces.PrimeFaces;
+import org.primefaces.component.datatable.DataTable;
+
+import br.upf.ads.topicos.entities.Evento;
+import br.upf.ads.topicos.entities.Pessoa;
+import br.upf.ads.topicos.entities.SubEvento;
+import br.upf.ads.topicos.jpa.GenericDao;
+import br.upf.ads.topicos.jpa.JpaUtil;
+import br.upf.ads.topicos.jsf.JsfUtil;
+import br.upf.ads.topicos.jsf.TrataException;
+
 
 @Named
 @ViewScoped
@@ -20,6 +35,7 @@ public class EventoBean implements Serializable {
 	private List<Evento> lista; // atributo para vinculo com o datatable da consulta
 	private Boolean editando; // atributo para controlar o painel visível editar ou consultar
 	private GenericDao<Evento> dao = new GenericDao<Evento>();
+	private Integer totalHorasEvento;
 	
 	public EventoBean() {
 		super();
@@ -86,8 +102,45 @@ public class EventoBean implements Serializable {
 		 em.close();
 		 return results;
 		 }
+	
+	public Integer findSomaTotalHoras(Integer evento) {
+		EntityManager em = JpaUtil.getEntityManager();
+		Integer valorFloat = 0;
+		Long valorLong;
+		try {
+			Query q = em.createQuery("SELECT SUM(totalHoras) FROM SubEvento WHERE evento = :evento");
+			q.setParameter("evento", evento);
 
+			if (!q.getResultList().isEmpty()) {
+				valorLong = (Long) q.getSingleResult();
+				valorFloat = valorLong.intValue();
+			} else {
+				JsfUtil.addErrorMessage("Nenhum resultado localizado!");
+			}
 
+		} catch (Throwable e) {
+			return null;
+		} finally {
+			em.close();
+		}
+
+		return valorFloat;
+	}
+	
+	public Integer carregarTotalHorasEvento(Integer evento) {
+		totalHorasEvento = findSomaTotalHoras(evento);
+		return totalHorasEvento;
+
+	}
+	
+	public Integer getTotalHorasEvento() {
+		return totalHorasEvento;
+	}
+
+	public void setTotalHorasEvento(Integer totalHorasEvento) {
+		this.totalHorasEvento = totalHorasEvento;
+	}
+	
 	public List<Evento> getLista() {
 		return lista;
 	}

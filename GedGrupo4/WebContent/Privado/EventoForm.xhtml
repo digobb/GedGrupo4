@@ -86,11 +86,11 @@
 							filterBy="#{e.dataTermino}" filterMatchMode="contains" >
 					<h:outputText value="#{e.dataTermino}" />
 				</p:column>
-				<p:column headerText="Total de Horas" 
-							sortBy="#{e.totalHoras}"
-							filterBy="#{e.totalHoras}" filterMatchMode="contains" >
-					<h:outputText value="#{e.totalHoras}" />
-				</p:column>
+				
+				<p:column headerText="Total Horas"
+						width="10%">
+						<h:outputText value="#{eventoBean.carregarTotalHorasEvento(item.id)}" />
+					</p:column>
 				
 				
 				
@@ -128,7 +128,7 @@
 					value="#{eventoBean.selecionado.totalHoras}"></p:inputNumber>
 					
 				<p:outputLabel value="Descrição"></p:outputLabel>
-        		<p:textEditor widgetVar="editor1" value="#{eventoBean.selecionado.descricao}" height="150" secure="false"  />
+        		<p:textEditor widgetVar="editor2" value="#{eventoBean.selecionado.descricao}" height="150" secure="false"  />
         	</p:panelGrid>
         	
 			<center><p:panelGrid columns="2" columnClasses="no-border, no-border">

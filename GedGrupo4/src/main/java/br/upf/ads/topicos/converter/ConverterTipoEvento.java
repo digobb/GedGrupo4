@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import br.upf.ads.topicos.entities.TipoEvento;
 import br.upf.ads.topicos.jpa.JpaUtil;
 
-@FacesConverter(value = "tipoTipoEventoConverter")
+@FacesConverter(value = "tipoEventoConverter")
 public class ConverterTipoEvento implements Converter {
 	@Override
 	public TipoEvento getAsObject(FacesContext fc, UIComponent uic, String value) {

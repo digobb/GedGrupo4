@@ -18,7 +18,7 @@ import org.hibernate.jpa.HibernateEntityManager;
  */
 public class JpaUtil {
 
-	private EntityManagerFactory factory;
+	private static EntityManagerFactory factory;
 
 	public JpaUtil() {
 		factory = Persistence.createEntityManagerFactory("appged");
@@ -28,7 +28,7 @@ public class JpaUtil {
 		return JpaUtilInstance.INSTANCE;
 	}
 
-	public EntityManager getEntityManager() {
+	public static EntityManager getEntityManager() {
 		return factory.createEntityManager();
 	}
 

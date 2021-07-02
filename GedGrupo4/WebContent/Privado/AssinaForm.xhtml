@@ -112,9 +112,16 @@
 				<p:datePicker id="navigator2" value="#{assinaBean.selecionado.dataInativo}"
 				monthNavigator="true" yearNavigator="true" />
 				
-				<p:outputLabel value="Imagem"></p:outputLabel>
-				<p:fileUpload listener="#{assinaBean.handleFileUpload}" mode="advanced" dragDropSupport="true"
-                       sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+				<p:outputLabel value="Imagem:" for="imagem" />
+						<h:panelGrid columns="2">
+							<p:fileUpload listener="#{assinaBean.handleFileUpload}" label="UPLOAD"
+								mode="advanced" dragDropSupport="true" update="imagem"
+								auto="true" sizeLimit="1000000" validateContentType="true"
+								accept=".gif,.jpg,.jpeg,.png" />
+
+							<p:graphicImage cache="false" id="imagem" stream="false"
+								width="200" height="200" value="#{assinaBean.file}" />
+						</h:panelGrid>
 				
 				<p:commandButton value="Salvar" ajax="true" update="consultar editar"
 				    icon="fa fa-save"

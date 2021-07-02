@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -29,7 +30,7 @@ public class Evento implements Serializable {
 	@SequenceGenerator(name = "EventoId",sequenceName = "EventoId", allocationSize = 1)	
 	private Integer id;
 	
-	@NotBlank(message = "O titulo deve ser informado!")
+	@NotNull(message = "O titulo deve ser informado!")
 	@Length(min = 1, max = 60, message = "O titulo deve ter entre {min} e {max} caracteres.")
 	@Basic(optional = false)
 	private String titulo;
@@ -42,13 +43,13 @@ public class Evento implements Serializable {
 	@Lob
 	private String descricao;
 	
-	@NotBlank(message = "A data de inicio deve ser informada!")
+	@NotNull(message = "A data de inicio deve ser informada!")
 	@Basic(optional = false)
 	@Temporal(TemporalType.DATE)
 	@Future(message = "A data de início deve ser no futuro")
 	private Date dataInicio;
 	
-	@NotBlank(message = "A data de término deve ser informada!")
+	@NotNull(message = "A data de término deve ser informada!")
 	@Basic(optional = false)
 	@Temporal(TemporalType.DATE)
 	@Future(message = "A data de términop deve ser no futuro")

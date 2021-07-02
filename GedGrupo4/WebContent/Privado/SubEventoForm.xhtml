@@ -137,13 +137,25 @@
 				<p:outputLabel value="Total de Horas"></p:outputLabel>
 				<p:inputText value="#{subEventoBean.selecionado.totalHoras}"></p:inputText>
 				
-				<p:outputLabel value="Evento" for="inputEvento" />
-				<p:autoComplete id="inputEvento" style="width:600px"
-				 dropdown="true" multiple="false" forceSelection="true"
-				 var="obj" itemLabel="#{obj.titulo}" itemValue="#{obj}"
-				 value="#{eventoBean.objeto.evento}"
-				 converter="EventoConverter"
-				 completeMethod="#{eventoBean.completeEvento}" />
+				
+				 
+				 <p:outputLabel value="Tipo Evento:" for="tipoevento" />
+						<p:autoComplete id="tipoevento" size="30"
+							dropdown="true" multiple="false" forceSelection="true"
+							var="tipoeventoItem" itemValue="#{tipoeventoItem}"
+							itemLabel="#{tipoeventoItem.descricao}"
+							value="#{subEventoBean.selecionado.tipoEvento}"
+							converter="tipoEventoConverter"
+							completeMethod="#{tipoEventoBean.completeTipoEvento}" />
+
+				<p:outputLabel value="Evento:" for="evento" />
+						<p:autoComplete id="evento" size="30"
+							dropdown="true" multiple="false" forceSelection="true"
+							var="eventoItem" itemValue="#{eventoItem}"
+							itemLabel="#{eventoItem.titulo}"
+							value="#{subEventoBean.selecionado.evento}"
+							converter="eventoConverter"
+							completeMethod="#{eventoBean.completeEvento}" />
 				
 				<p:outputLabel value="Assinantes" for="assinante"></p:outputLabel>
 		        <p:selectManyMenu id="assinante" value="#{subEventoBean.selecionado.assina}"
@@ -158,7 +170,7 @@
 		        </p:selectManyMenu>
 				
 				<p:outputLabel value="Descrição"></p:outputLabel>
-        		<p:textEditor widgetVar="editor1" value="#{eventoBean.selecionado.descricao}" height="150" secure="false"  />
+        		<p:textEditor widgetVar="editor1" value="#{subEventoBean.selecionado.descricao}" height="150" secure="false"  />
         	</p:panelGrid>
         	
 			<center><p:panelGrid columns="2" columnClasses="no-border, no-border">
