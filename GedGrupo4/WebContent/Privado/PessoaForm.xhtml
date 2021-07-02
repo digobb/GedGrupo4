@@ -119,8 +119,6 @@
 				<p:password toggleMask="true" redisplay="true"
 					value="#{pessoaBean.selecionado.senha}"></p:password>
 
-				<div class="card">
-					<h:form>
 						<p:outputLabel value="Tipo DOC." />
 						<p:selectOneMenu id="option"
 							value="#{pessoaBean.selecionado.tipoDocumento}">
@@ -132,11 +130,9 @@
 								<h:outputText value="options" style="font-weight:bold;" />
 							</f:facet>
 						</p:selectOneMenu>
-					</h:form>
-					<div class="card">
-
+				
 						<p:outputLabel value="Nacionalidade"/>
-						<p:selectOneMenu id="option"
+						<p:selectOneMenu id="option2"
 							value="#{pessoaBean.selecionado.nacionalidade}">
 							<f:selectItem itemLabel="Selecione..." itemValue="" />
 							<f:selectItem itemLabel="Brasileira" itemValue="Brasileira" />
@@ -145,8 +141,6 @@
 								<h:outputText value="options" style="font-weight:bold;" />
 							</f:facet>
 						</p:selectOneMenu>
-				</div>
-				</div>
 				<p:outputLabel value="Documento"></p:outputLabel>
 				<p:inputText value="#{pessoaBean.selecionado.documento}"></p:inputText>
 

@@ -137,11 +137,14 @@ public class Participacao implements Serializable {
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Participacao [id=" + id + ", horasParticipou=" + horasParticipou + ", arquivo=" + arquivo
-				+ ", modalidadeSubEvento=" + modalidadeSubEvento + ", pessoa=" + pessoa + "]";
+		return "Participacao [id=" + id + ", horasParticipou=" + horasParticipou + ", modalidadeSubEvento="
+				+ modalidadeSubEvento + ", pessoa=" + pessoa + "]";
 	}
+
+
 	
 
 }
