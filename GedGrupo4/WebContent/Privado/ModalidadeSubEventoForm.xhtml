@@ -105,7 +105,7 @@
 								dropdown="true" multiple="false" forceSelection="true"
 								var="s" itemLabel="#{s.titulo}" itemValue="#{s}"
 								value="#{modalidadeSubEventoBean.selecionado.subEvento}"
-								converter="subEventoConverter"
+								converter="subSubEventoConverter"
 								completeMethod="#{modalidadeSubEventoBean.carregarSubEventos}"></p:autoComplete>
 				
 				<p:outputLabel value="Modalidade" for="itModalidade"></p:outputLabel>
@@ -113,7 +113,7 @@
 								dropdown="true" multiple="false" forceSelection="true"
 								var="m" itemLabel="#{m.descricao}" itemValue="#{m}"
 								value="#{modalidadeSubEventoBean.selecionado.modalidade}"
-								converter="modalidadeConverter"
+								converter="modalidadeSubModalidadeSubEventoConverter"
 								completeMethod="#{modalidadeSubEventoBean.carregarModalidades}"></p:autoComplete>
 								
 				<p:outputLabel value="Template" for="itTemplate"></p:outputLabel>
