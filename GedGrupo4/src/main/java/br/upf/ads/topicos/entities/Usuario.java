@@ -40,7 +40,7 @@ public class Usuario implements Serializable {
 	@Length(max = 40, min = 6, message = "A senha deve ter entre {min} e {max} caracteres!")
 	private String senha;
 	
-	@Basic(optional = false)
+	
 	@Temporal(TemporalType.DATE)
 	private Date dataInativo;
 	
