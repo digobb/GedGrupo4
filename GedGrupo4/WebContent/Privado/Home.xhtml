@@ -97,6 +97,11 @@ form {
 								<p:fileDownload contentDisposition="inline"
 									value="#{relTipoEventoBean.gerarPDF()}" />
 							</p:menuitem>
+							<p:menuitem value="Assinantes Certificado" icon="pi pi-file-pdf"
+								ajax="false" target="_blank">
+								<p:fileDownload contentDisposition="inline"
+									value="#{relAssinaBean.gerarPDF()}" />
+							</p:menuitem>
 						</p:submenu>
 
 					</p:menu>
