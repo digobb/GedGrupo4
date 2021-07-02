@@ -1,16 +1,21 @@
 package br.upf.ads.topicos.named;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.faces.bean.RequestScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+
+import org.primefaces.model.StreamedContent;
 
 import br.upf.ads.topicos.entities.Assina;
 import br.upf.ads.topicos.entities.SubEvento;
 import br.upf.ads.topicos.jpa.GenericDao;
 import br.upf.ads.topicos.jsf.JsfUtil;
 import br.upf.ads.topicos.jsf.TrataException;
+import br.upf.ads.topicos.relatorios.RelatorioUtil;
 
 @Named
 @ViewScoped
@@ -27,6 +32,22 @@ public class SubEventoBean implements Serializable {
 		assinantes = new GenericDao<Assina>().createQuery("from Assina");
 		selecionado = new SubEvento();
 		carregarLista();
+	}
+	
+	@Named
+	@RequestScoped
+	public class RelSubEventoBean {
+		public StreamedContent gerarPDF() {
+			try {
+				HashMap parameters = new HashMap();
+				return RelatorioUtil.gerarStreamRelatorioPDF("WEB-INF/relatorios/SubEvento/SubEvento.jasper", parameters,
+						"SubEvento.pdf");
+			} catch (Exception e) {
+				e.printStackTrace();
+				JsfUtil.addErrorMessage(e.getMessage());
+				return null;
+			}
+		}
 	}
 	
 	public void incluir() {
