@@ -35,15 +35,15 @@ FROM assina]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="90" splitType="Stretch">
+		<band height="98" splitType="Stretch">
 			<staticText>
 				<reportElement style="Title" x="0" y="0" width="340" height="33" uuid="6f9c1004-6140-4588-9c4f-d75824835765"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Assinantes Certificado]]></text>
 			</staticText>
 			<image>
-				<reportElement x="433" y="0" width="142" height="90" uuid="812d32e5-4087-4085-97bb-822054a1661f"/>
-				<imageExpression><![CDATA["C:\\Users\\db\\git\\GedGrupo4\\GedGrupo4\\WebContent\\WEB-INF\\relatorios\\logoupf.png"]]></imageExpression>
+				<reportElement x="433" y="0" width="142" height="98" uuid="6464d83f-a1a8-4485-8262-17b63fdd70de"/>
+				<imageExpression><![CDATA["../logo.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

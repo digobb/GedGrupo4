@@ -58,8 +58,8 @@ ORDER BY subevento.datahorainicio DESC]]>
 				<text><![CDATA[SubEventos]]></text>
 			</staticText>
 			<image>
-				<reportElement x="433" y="0" width="142" height="87" uuid="e1435850-009b-495b-93ce-5d5636b9301b"/>
-				<imageExpression><![CDATA["C:\\Users\\db\\git\\GedGrupo4\\GedGrupo4\\WebContent\\WEB-INF\\relatorios\\logoupf.png"]]></imageExpression>
+				<reportElement x="433" y="0" width="142" height="87" uuid="9dbffc61-2d7d-4534-9fed-ba0a0c9f2727"/>
+				<imageExpression><![CDATA["../logo.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

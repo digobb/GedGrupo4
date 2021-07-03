@@ -33,15 +33,15 @@ ORDER BY tipoevento.descricao DESC]]>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="87" splitType="Stretch">
+		<band height="90" splitType="Stretch">
 			<staticText>
 				<reportElement style="Title" x="0" y="0" width="263" height="33" uuid="6f9c1004-6140-4588-9c4f-d75824835765"/>
 				<textElement verticalAlignment="Middle"/>
 				<text><![CDATA[Tipo de Eventos]]></text>
 			</staticText>
 			<image>
-				<reportElement x="433" y="0" width="142" height="87" uuid="4ea3345e-7e2f-41a6-abce-bb7446b07055"/>
-				<imageExpression><![CDATA["C:\\Users\\db\\git\\GedGrupo4\\GedGrupo4\\WebContent\\WEB-INF\\relatorios\\logoupf.png"]]></imageExpression>
+				<reportElement x="433" y="0" width="142" height="90" uuid="1fa11df2-d571-42dd-af75-b2fcbdb5fa50"/>
+				<imageExpression><![CDATA["../logo.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
