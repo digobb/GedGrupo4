@@ -43,12 +43,12 @@
 	            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
 	        </p:confirmDialog>
 
-			<p:dataTable var="p" value="#{assinaBean.lista}" rows="10"
+			<p:dataTable var="a" value="#{assinaBean.lista}" rows="10"
 				paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				currentPageReportTemplate="Mostrando de {startRecord} até {endRecord} de {totalRecords}"
 				rowsPerPageTemplate="10,30,60" selectionMode="single"
-				selection="#{assinaBean.selecionado}" rowKey="#{p.id}"
+				selection="#{assinaBean.selecionado}" rowKey="#{a.id}"
 				emptyMessage="Nenhum registro encontrado."
 				>
 
@@ -73,12 +73,6 @@
 					<h:outputText value="#{a.funcao}">
 					   
 					</h:outputText>
-				</p:column>
-				
-				<p:column headerText="Imagem" 
-							sortBy="#{a.imagem}"
-							filterBy="#{a.imagem}" filterMatchMode="contains" >
-					<h:outputText value="#{a.imagem}" />
 				</p:column>
 				
 				<p:column headerText="Data Inativo" 

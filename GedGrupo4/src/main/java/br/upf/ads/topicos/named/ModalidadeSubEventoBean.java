@@ -21,7 +21,6 @@ import br.upf.ads.topicos.jsf.TrataException;
 @ViewScoped
 public class ModalidadeSubEventoBean implements Serializable{
 	
-	private static final long serialVersionUID = -138402691449651120L;
 	
 	private ModalidadeSubEvento selecionado;
 	private List<ModalidadeSubEvento> lista;

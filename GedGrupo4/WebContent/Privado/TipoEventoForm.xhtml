@@ -84,8 +84,9 @@
 				<p:inputNumber decimalPlaces="0" disabled="true" placeholder="Auto"
 					value="#{tipoEventoBean.selecionado.id}"></p:inputNumber>
 
-				<p:outputLabel value="Descrição"></p:outputLabel>
-				<p:inputText value="#{tipoEventoBean.selecionado.descricao}"></p:inputText>
+				<p:outputLabel value="Descrição:" for="descricao"></p:outputLabel>
+						<p:inputTextarea id="descricao"
+							value="#{tipoEventoBean.selecionado.descricao}" cols="50" rows="4" />
 
 				<p:commandButton value="Salvar" ajax="true" update="consultar editar"
 				    icon="fa fa-save"

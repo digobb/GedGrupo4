@@ -140,7 +140,7 @@ public class Assina implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Assina [id=" + id + ", nome=" + nome + ", funcao=" + funcao + "]";
+		return "Assina [id=" + id + ", nome=" + nome + "]";
 	}
 
 	

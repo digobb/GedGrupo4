@@ -1,5 +1,6 @@
 package br.upf.ads.topicos.relatorios;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.faces.view.ViewScoped;
@@ -11,7 +12,14 @@ import br.upf.ads.topicos.jsf.JsfUtil;
 
 @Named
 @ViewScoped
-public class RelSubEventoBean {
+public class RelSubEventoBean implements Serializable {
+	
+	
+	public RelSubEventoBean() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public StreamedContent gerarPDF() {
 		try {
 			HashMap parameters = new HashMap();

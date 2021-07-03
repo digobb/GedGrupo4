@@ -18,6 +18,7 @@ import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
 
 import br.upf.ads.topicos.entities.Assina;
+import br.upf.ads.topicos.entities.TipoEvento;
 import br.upf.ads.topicos.jpa.GenericDao;
 import br.upf.ads.topicos.jpa.JpaUtil;
 import br.upf.ads.topicos.jsf.JsfUtil;
@@ -115,6 +116,15 @@ public class AssinaBean implements Serializable{
 		res.getOutputStream().write(b);
 		FacesContext.getCurrentInstance().responseComplete();
 	}
+	public List<Assina> completeAssina(String query) {
+		EntityManager em = JpaUtil.getInstance().getEntityManager();
+		 List<Assina> results = em.createQuery(
+		 "from Assina where upper(nome) like "+
+		"'"+query.trim().toUpperCase()+"%' "+
+		 "order by nome").getResultList();
+		 em.close();
+		 return results;
+		 }
 	
 	public UploadedFile getFile() {
 		return file;

@@ -43,12 +43,12 @@
 	            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
 	        </p:confirmDialog>
 
-			<p:dataTable var="p" value="#{subEventoBean.lista}" rows="10"
+			<p:dataTable var="s" value="#{subEventoBean.lista}" rows="10"
 				paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				currentPageReportTemplate="Mostrando de {startRecord} até {endRecord} de {totalRecords}"
 				rowsPerPageTemplate="10,30,60" selectionMode="single"
-				selection="#{subEventoBean.selecionado}" rowKey="#{p.id}"
+				selection="#{subEventoBean.selecionado}" rowKey="#{s.id}"
 				emptyMessage="Nenhum registro encontrado."
 				>
 
@@ -93,24 +93,16 @@
 				</p:column>
 				
 				<p:column headerText="Evento" 
-							sortBy="#{s.evento}"
-							filterBy="#{s.evento}" filterMatchMode="contains" >
-					<h:outputText value="#{s.evento}" />
+							sortBy="#{s.evento.titulo}"
+							filterBy="#{s.evento.titulo}" filterMatchMode="contains" >
+					<h:outputText value="#{s.evento.titulo}" />
 				</p:column>
 				<p:column headerText="Tipo do Evento" 
-							sortBy="#{s.tipoEvento}"
-							filterBy="#{s.tipoEvento}" filterMatchMode="contains" >
-					<h:outputText value="#{s.tipoEvento}" />
+							sortBy="#{s.tipoEvento.descricao}"
+							filterBy="#{s.tipoEvento.descricao}" filterMatchMode="contains" >
+					<h:outputText value="#{s.tipoEvento.descricao}" />
 				</p:column>
-				<p:column headerText="Assina" 
-							sortBy="#{s.assina}"
-							filterBy="#{s.assina}" filterMatchMode="contains" >
-					<h:outputText value="#{s.assina}" />
-				</p:column>
-				
-				
-
-
+						
 			</p:dataTable>
 		</h:form>
 
@@ -169,8 +161,9 @@
 		            </p:column>
 		        </p:selectManyMenu>
 				
-				<p:outputLabel value="Descrição"></p:outputLabel>
-        		<p:textEditor widgetVar="editor1" value="#{subEventoBean.selecionado.descricao}" height="150" secure="false"  />
+				<p:outputLabel value="Descrição:" for="descricao"></p:outputLabel>
+						<p:inputTextarea id="descricao"
+							value="#{subEventoBean.selecionado.descricao}" cols="50" rows="4" />
         	</p:panelGrid>
         	
 			<center><p:panelGrid columns="2" columnClasses="no-border, no-border">
