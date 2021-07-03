@@ -40,8 +40,8 @@ ORDER BY tipoevento.descricao DESC]]>
 				<text><![CDATA[Tipo de Eventos]]></text>
 			</staticText>
 			<image>
-				<reportElement x="412" y="0" width="141" height="87" uuid="62d71414-bed7-4278-be89-dc87dc1074ef"/>
-				<imageExpression><![CDATA["logoupf.png"]]></imageExpression>
+				<reportElement x="433" y="0" width="142" height="87" uuid="4ea3345e-7e2f-41a6-abce-bb7446b07055"/>
+				<imageExpression><![CDATA["C:\\Users\\db\\git\\GedGrupo4\\GedGrupo4\\WebContent\\WEB-INF\\relatorios\\logoupf.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
