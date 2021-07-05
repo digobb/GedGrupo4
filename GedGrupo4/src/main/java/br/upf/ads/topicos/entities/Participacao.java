@@ -31,10 +31,10 @@ public class Participacao implements Serializable {
 	@Column(nullable = false)
 	private Float horasParticipou;
 	
-	//Upload do arquivo
+	
 	@Basic(optional = true)
 	@Lob
-	private byte[] arquivo;
+	private String arquivo;
 	
 	@NotNull(message = "A modalidade sub-evento deve ser informada!")
 	@ManyToOne(optional = false)
@@ -45,28 +45,6 @@ public class Participacao implements Serializable {
     private Pessoa pessoa;
 	
 	private static final long serialVersionUID = 1L;
-
-	public Participacao() {
-		super();
-	}
-	
-
-	public Participacao(Integer id) {
-		super();
-		this.id = id;
-	}
-
-
-	public Participacao(Integer id, Float horasParticipou, byte[] arquivo, ModalidadeSubEvento modalidadeSubEvento,
-			Pessoa pessoa) {
-		super();
-		this.id = id;
-		this.horasParticipou = horasParticipou;
-		this.arquivo = arquivo;
-		this.modalidadeSubEvento = modalidadeSubEvento;
-		this.pessoa = pessoa;
-	}
-
 
 	public Integer getId() {
 		return id;
@@ -84,16 +62,12 @@ public class Participacao implements Serializable {
 		this.horasParticipou = horasParticipou;
 	}
 
-	public byte[] getArquivo() {
+	public String getArquivo() {
 		return arquivo;
 	}
 
-	public void setArquivo(byte[] arquivo) {
+	public void setArquivo(String arquivo) {
 		this.arquivo = arquivo;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	public ModalidadeSubEvento getModalidadeSubEvento() {
@@ -109,6 +83,28 @@ public class Participacao implements Serializable {
 	}
 
 	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	public Participacao() {
+		super();
+	}
+
+	public Participacao(Integer id) {
+		super();
+		this.id = id;
+	}
+
+	public Participacao(Integer id,
+			@NotNull(message = "Deve ser informada a quantidade de horas de participação!") @DecimalMin(value = "0", inclusive = false, message = "A quantidade de horas informadas deve ser maior que 0!") Float horasParticipou,
+			String arquivo,
+			@NotNull(message = "A modalidade sub-evento deve ser informada!") ModalidadeSubEvento modalidadeSubEvento,
+			@NotNull(message = "A pessoa deve ser informada!") Pessoa pessoa) {
+		super();
+		this.id = id;
+		this.horasParticipou = horasParticipou;
+		this.arquivo = arquivo;
+		this.modalidadeSubEvento = modalidadeSubEvento;
 		this.pessoa = pessoa;
 	}
 
@@ -137,12 +133,15 @@ public class Participacao implements Serializable {
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Participacao [id=" + id + ", horasParticipou=" + horasParticipou + ", modalidadeSubEvento="
-				+ modalidadeSubEvento + ", pessoa=" + pessoa + "]";
+		return "Participacao [id=" + id + ", horasParticipou=" + horasParticipou + ", arquivo=" + arquivo
+				+ ", modalidadeSubEvento=" + modalidadeSubEvento + ", pessoa=" + pessoa + "]";
 	}
+
+	
+
+
 
 
 	

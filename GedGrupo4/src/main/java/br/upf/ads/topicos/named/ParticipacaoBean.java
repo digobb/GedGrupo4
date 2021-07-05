@@ -7,7 +7,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
-import br.upf.ads.topicos.entities.Pessoa;
+import br.upf.ads.topicos.entities.Participacao;
 import br.upf.ads.topicos.jpa.GenericDao;
 import br.upf.ads.topicos.jsf.JsfUtil;
 import br.upf.ads.topicos.jsf.TrataException;
@@ -15,21 +15,21 @@ import br.upf.ads.topicos.jpa.JpaUtil;
 
 @Named
 @ViewScoped
-public class PessoaBean implements Serializable{
+public class ParticipacaoBean implements Serializable{
 
-	private Pessoa selecionado; // atributo para vinculo com campos do formulário
-	private List<Pessoa> lista; // atributo para vinculo com o datatable da consulta
+	private Participacao selecionado; // atributo para vinculo com campos do formulário
+	private List<Participacao> lista; // atributo para vinculo com o datatable da consulta
 	private Boolean editando; // atributo para controlar o painel visível editar ou consultar
-	private GenericDao<Pessoa> dao = new GenericDao<Pessoa>();
+	private GenericDao<Participacao> dao = new GenericDao<Participacao>();
 	
-	public PessoaBean() {
+	public ParticipacaoBean() {
 		super();
 		setEditando(false);
 		carregarLista();
 	}
 	
 	public void incluir() {
-		selecionado = new Pessoa(); // cria novo produto
+		selecionado = new Participacao(); // cria novo produto
 		setEditando(true);
 	}
 
@@ -71,37 +71,37 @@ public class PessoaBean implements Serializable{
 	
 	public void carregarLista() {
 		try {
-			lista = dao.createQuery("from Pessoa order by id");
+			lista = dao.createQuery("from Participacao order by id");
 		} catch (Exception e) {
 			e.printStackTrace();
 			JsfUtil.addErrorMessage(TrataException.getMensagem(e)); 
 		}			
 	}
-	public List<Pessoa> completePessoa(String query) {
+	public List<Participacao> completeParticipacao(String query) {
 		EntityManager em = JpaUtil.getEntityManager();
-		List<Pessoa> results = em.createQuery(
-				"FROM Pessoa WHERE upper(nome) like " + "'" + query.trim().toUpperCase() + "%' " + "ORDER BY nome")
+		List<Participacao> results = em.createQuery(
+				"FROM Participacao WHERE upper(arquivo) like " + "'" + query.trim().toUpperCase() + "%' " + "ORDER BY arquivo")
 				.getResultList();
 		em.close();
 		return results;
 	}
 
-	public List<Pessoa> getLista() {
+	public List<Participacao> getLista() {
 		return lista;
 	}
 
 
-	public void setLista(List<Pessoa> lista) {
+	public void setLista(List<Participacao> lista) {
 		this.lista = lista;
 	}
 
 
-	public Pessoa getSelecionado() {
+	public Participacao getSelecionado() {
 		return selecionado;
 	}
 
 
-	public void setSelecionado(Pessoa selecionado) {
+	public void setSelecionado(Participacao selecionado) {
 		this.selecionado = selecionado;
 	}
 

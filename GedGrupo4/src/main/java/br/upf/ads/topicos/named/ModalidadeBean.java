@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
 
 import br.upf.ads.topicos.entities.Modalidade;
 import br.upf.ads.topicos.entities.Pessoa;
 import br.upf.ads.topicos.entities.Template;
 import br.upf.ads.topicos.jpa.GenericDao;
+import br.upf.ads.topicos.jpa.JpaUtil;
 import br.upf.ads.topicos.jsf.JsfUtil;
 import br.upf.ads.topicos.jsf.TrataException;
 
@@ -76,7 +78,16 @@ public class ModalidadeBean implements Serializable{
 			e.printStackTrace();
 			JsfUtil.addErrorMessage(TrataException.getMensagem(e)); 
 		}			
-	}	
+	}
+	
+	public List<Modalidade> completeModalidade(String query) {
+		EntityManager em = JpaUtil.getEntityManager();
+		List<Modalidade> results = em.createQuery(
+				"FROM Modalidade WHERE upper(descricao) like " + "'" + query.trim().toUpperCase() + "%' " + "ORDER BY descricao")
+				.getResultList();
+		em.close();
+		return results;
+	}
 
 	public List<Modalidade> getLista() {
 		return lista;

@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import br.upf.ads.topicos.entities.Modalidade;
 import br.upf.ads.topicos.entities.ModalidadeSubEvento;
+import br.upf.ads.topicos.entities.Pessoa;
 import br.upf.ads.topicos.entities.SubEvento;
 import br.upf.ads.topicos.entities.Template;
 import br.upf.ads.topicos.jpa.GenericDao;
@@ -111,11 +112,19 @@ public class ModalidadeSubEventoBean implements Serializable{
 
 	public void carregarLista() {
 		try {
-			lista = dao.createQuery("from modalidadesubevento order by id");
+			lista = dao.createQuery("from ModalidadeSubEvento order by id");
 		} catch (Exception e) {
 			e.printStackTrace();
 			JsfUtil.addErrorMessage(TrataException.getMensagem(e)); 
 		}			
+	}
+	public List<ModalidadeSubEvento> completeModalidadeSubEvento(String query) {
+		EntityManager em = JpaUtil.getEntityManager();
+		List<ModalidadeSubEvento> results = em.createQuery(
+				"FROM ModalidadeSubEvento  ORDER BY id")
+				.getResultList();
+		em.close();
+		return results;
 	}
 	
 	@SuppressWarnings("unchecked")

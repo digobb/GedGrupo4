@@ -1,0 +1,124 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:outputStylesheet library="webjars" name="font-awesome/5.12.0/css/all.min-jsf.css" />
+	<h:outputStylesheet library="webjars" name="font-awesome/5.12.0/css/v4-shims.min-jsf.css" />
+
+<style>
+   .no-border{
+      border-style: hidden !important;
+      text-align: center !important;
+   }
+</style>
+
+</h:head>
+
+<h:body>
+
+
+	<p:panel id="consultar" visible="#{!usuarioBean.editando}">
+		<h:form>
+            
+			<p:commandButton value="Incluir" ajax="true" update="consultar editar"
+				    icon="fa fa-plus"
+					action="#{usuarioBean.incluir}"></p:commandButton>
+					
+			<p:commandButton value="Alterar" ajax="true" update="consultar editar"
+				    icon="fa fa-edit" disabled="#{usuarioBean.selecionado == null}"
+					action="#{usuarioBean.alterar}"></p:commandButton> 
+					           
+			<p:commandButton value="Excluir" ajax="true" update="consultar editar"
+				    icon="fa fa-remove" disabled="#{usuarioBean.selecionado == null}"
+					action="#{usuarioBean.excluir}">
+			    <p:confirm header="Confirmação" 
+			               message="Confirma a exclusão?" 
+			               icon="pi pi-exclamation-triangle"/>		
+			</p:commandButton>            
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+	            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+	            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" />
+	        </p:confirmDialog>
+
+			<p:dataTable var="u" value="#{usuarioBean.lista}" rows="10"
+				paginator="true"
+				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				currentPageReportTemplate="Mostrando de {startRecord} até {endRecord} de {totalRecords}"
+				rowsPerPageTemplate="10,30,60" selectionMode="single"
+				selection="#{usuarioBean.selecionado}" rowKey="#{u.id}"
+				emptyMessage="Nenhum registro encontrado."
+				>
+
+				<p:ajax event="rowSelect" update="consultar editar" />
+
+
+				<p:column headerText="Id" 
+							sortBy="#{u.id}" sortOrder="asc" 
+							filterBy="#{u.id}" filterMatchMode="exact">
+					<h:outputText value="#{u.id}" />
+				</p:column>
+
+				<p:column headerText="Nome" 
+							sortBy="#{u.nome}"
+							filterBy="#{u.nome}" filterMatchMode="contains" >
+					<h:outputText value="#{u.nome}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+
+	</p:panel>
+
+
+	<p:panel id="editar" visible="#{usuarioBean.editando}">
+
+		<h:form>
+			<p:panelGrid columns="2" columnClasses="no-border, no-border"> 
+				<p:outputLabel value="Id"></p:outputLabel>
+				<p:inputNumber decimalPlaces="0" disabled="true" placeholder="Auto"
+					value="#{usuarioBean.selecionado.id}"></p:inputNumber>
+
+				<p:outputLabel value="Nome"></p:outputLabel>
+				<p:inputText value="#{usuarioBean.selecionado.nome}"></p:inputText>
+
+				
+				<p:outputLabel value="E-mail"></p:outputLabel>
+				<p:inputText value="#{usuarioBean.selecionado.email}"></p:inputText>
+				
+				<p:outputLabel value="Senha:" for="senha" />
+					<p:password id="senha" value="#{usuarioBean.selecionado.senha}"
+						match="senhaConfirm"
+						validatorMessage="Senha e Confirmar Senha são diferentes!" />
+
+					<p:outputLabel value="Confirmar Senha:" for="senhaConfirm"></p:outputLabel>
+					<p:password id="senhaConfirm" value="#{usuarioBean.selecionado.senha}" />
+					
+				<p:outputLabel  value="Data Inativo" />
+				<p:datePicker id="navigator3" value="#{usuarioBean.selecionado.dataInativo}"
+				monthNavigator="true" yearNavigator="true" />
+				
+
+				<p:commandButton value="Salvar" ajax="true" update="consultar editar"
+				    icon="fa fa-save"
+					action="#{usuarioBean.salvar}"></p:commandButton>
+
+				<p:commandButton value="Cancelar" ajax="true" update="consultar editar"
+				    icon="fa fa-undo" immediate="true"
+					action="#{usuarioBean.cancelar}"></p:commandButton>					
+
+			</p:panelGrid>
+		</h:form>
+		
+	   <p:growl id="msg"></p:growl> 
+
+   </p:panel>
+
+
+
+
+
+</h:body>
+</html>

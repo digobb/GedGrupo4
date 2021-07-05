@@ -79,12 +79,7 @@
 					<h:outputText value="#{m.template.descricao}" />
 				</p:column>
 
-				<p:column headerText="Nº de Participações" sortBy="#{m.participacoes.size}" filterBy="#{m.participacoes.size}"
-					filterMatchMode="exact">
-					<h:outputText value="#{m.participacoes.size()}">
-						<f:convertNumber integerOnly="true"></f:convertNumber>
-					</h:outputText>
-				</p:column>
+				
 
 			</p:dataTable>
 		</h:form>
@@ -113,7 +108,7 @@
 								dropdown="true" multiple="false" forceSelection="true"
 								var="m" itemLabel="#{m.descricao}" itemValue="#{m}"
 								value="#{modalidadeSubEventoBean.selecionado.modalidade}"
-								converter="modalidadeSubModalidadeSubEventoConverter"
+								converter="modalidadeConverter"
 								completeMethod="#{modalidadeSubEventoBean.carregarModalidades}"></p:autoComplete>
 								
 				<p:outputLabel value="Template" for="itTemplate"></p:outputLabel>
@@ -127,9 +122,10 @@
 				<p:commandButton value="Salvar" ajax="true" icon="fa fa-save"
 					update="consultar editar" action="#{modalidadeSubEventoBean.salvar}"></p:commandButton>
 
-				<p:commandButton value="Cancelar" ajax="true" icon="fa fa-undo"
-					immediates="true" update="consultar editar"
-					action="#{modalidadeSubEventoBean.cancelar}"></p:commandButton>
+				<p:commandButton value="Cancelar" ajax="true" update="consultar editar"
+				    icon="fa fa-undo" immediate="true"
+					action="#{modalidadeSubEventoBean.cancelar}"></p:commandButton>					
+
 
 			</p:panelGrid>
 		</h:form>
